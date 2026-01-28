@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cuaderno Azul — Exploración</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#1f3b77" />
+</head>
+
+<body>
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">🗺️</div>
+      <div>
+        <div class="brand-title">Cuaderno Azul</div>
+        <div class="brand-sub">Exploración tranquila, con intención</div>
+      </div>
+    </div>
+
+    <div class="status">
+      <div class="pill" id="progressPill">0/9 observaciones</div>
+      <button class="ghost" id="resetBtn" title="Borrar progreso">Reiniciar</button>
+    </div>
+  </header>
+
+  <!-- App -->
+  <main class="app">
+    <!-- Left: “Scene” -->
+    <section class="scene card">
+      <div class="scene-header">
+        <h1>Un paseo contigo</h1>
+        <p>
+          No hay prisa. Mira con calma. Haz clic en lo que te llame la atención.
+        </p>
+      </div>
+
+      <div class="canvas" role="application" aria-label="Mapa interactivo">
+        <!-- River -->
+        <div class="river" aria-hidden="true"></div>
+
+        <!-- Clickable items (9) -->
+        <button class="item stone s1" data-id="d1" aria-label="Piedra 1">
+          <span class="icon" aria-hidden="true">🪨</span>
+        </button>
+        <button class="item stone s2" data-id="d2" aria-label="Piedra 2">
+          <span class="icon" aria-hidden="true">🪨</span>
+        </button>
+        <button class="item stone s3" data-id="d3" aria-label="Piedra 3">
+          <span class="icon" aria-hidden="true">🪨</span>
+        </button>
+
+        <button class="item animal a1" data-id="d4" aria-label="Animalito 1">
+          <span class="icon" aria-hidden="true">🐾</span>
+        </button>
+        <button class="item animal a2" data-id="d5" aria-label="Animalito 2">
+          <span class="icon" aria-hidden="true">🦊</span>
+        </button>
+        <button class="item animal a3" data-id="d6" aria-label="Animalito 3">
+          <span class="icon" aria-hidden="true">🦦</span>
+        </button>
+
+        <button class="item note n1" data-id="d7" aria-label="Página del cuaderno">
+          <span class="icon" aria-hidden="true">📘</span>
+        </button>
+        <button class="item note n2" data-id="d8" aria-label="Otra página del cuaderno">
+          <span class="icon" aria-hidden="true">📎</span>
+        </button>
+
+        <button class="item fossil f1 locked" data-id="d9" aria-label="Fósil (bloqueado)">
+          <span class="icon" aria-hidden="true">🦕</span>
+          <span class="lock" aria-hidden="true">🔒</span>
+        </button>
+
+        <!-- Soft hints -->
+        <div class="hint h1" aria-hidden="true">río</div>
+        <div class="hint h2" aria-hidden="true">orilla</div>
+        <div class="hint h3" aria-hidden="true">silencio</div>
+      </div>
+
+      <div class="scene-footer">
+        <div class="mini">
+          <div class="mini-title">Regla del juego</div>
+          <div class="mini-text">Explorar es suficiente. Si encuentras 6 observaciones, el fósil se desbloquea.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: “Encarta-like info panel” -->
+    <aside class="panel card" aria-live="polite">
+      <div class="panel-top">
+        <div class="panel-title">Ficha</div>
+        <div class="panel-sub" id="panelSub">Selecciona algo en el mapa.</div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Pestañas">
+        <button class="tab active" data-tab="resumen" role="tab" aria-selected="true">Resumen</button>
+        <button class="tab" data-tab="habitat" role="tab" aria-selected="false">Hábitat</button>
+        <button class="tab" data-tab="nota" role="tab" aria-selected="false">Nota</button>
+      </div>
+
+      <div class="tabpanes">
+        <div class="pane active" id="pane-resumen" role="tabpanel">
+          <div class="big-emoji" id="bigEmoji">🟦</div>
+          <h2 id="title">Cuaderno Azul</h2>
+          <p id="summary" class="lead">
+            Esto es un lugar pequeño para descubrir cosas que me recuerdan a ti.
+          </p>
+          <div class="meta" id="meta"></div>
+        </div>
+
+        <div class="pane" id="pane-habitat" role="tabpanel">
+          <h3>Contexto</h3>
+          <p id="habitat">
+            Un paseo tranquilo: orilla, piedras, detalles, animalitos y una nostalgia bonita.
+          </p>
+          <div class="callout" id="callout">
+            Pista: las cosas pequeñas suelen ser las más verdaderas.
+          </div>
+        </div>
+
+        <div class="pane" id="pane-nota" role="tabpanel">
+          <h3>Nota personal</h3>
+          <p id="note">
+            Cuando estés lista, explora sin prisa. Esto no intenta impresionarte: intenta mirarte bien.
+          </p>
+
+          <div class="final card inner" id="finalCard" hidden>
+            <div class="final-top">
+              <div class="final-badge">FINAL</div>
+              <div class="final-title">La última página</div>
+            </div>
+            <p class="final-text" id="finalText"></p>
+            <button class="primary" id="copyBtn">Copiar frase</button>
+            <div class="copied" id="copiedMsg" hidden>Copiado.</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div class="modal-emoji" id="modalEmoji">🪨</div>
+        <div>
+          <div class="modal-title" id="modalTitle">Observación</div>
+          <div class="modal-sub" id="modalSub">—</div>
+        </div>
+        <button class="close" id="closeModal" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-text" id="modalText"></p>
+        <div class="modal-actions">
+          <button class="primary" id="markBtn">Marcar como observado</button>
+          <button class="ghost" id="laterBtn">Dejar para después</button>
+        </div>
+        <div class="modal-footnote" id="modalFootnote"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
