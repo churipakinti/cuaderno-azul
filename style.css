@@ -223,7 +223,7 @@ button {
 }
 
 .h-orilla {
-    left: 35%;
+    left: 30%;
     top: 65%;
 }
 
@@ -236,8 +236,8 @@ button {
 /* SLOTS (9 blank white squares) */
 .slot {
     position: absolute;
-    width: 56px;
-    height: 56px;
+    width: 20px;
+    height: 20px;
 
     background: rgba(255, 255, 255, 0.92);
     border: 2px solid rgba(255, 255, 255, 0.85);
@@ -248,11 +248,12 @@ button {
 
     box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
     transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    transform: translate(-50%, -50%);
     z-index: 10;
 }
 
 .slot:hover {
-    transform: translateY(-2px);
+    transform: translate(-50%, -52%);
     box-shadow: 0 12px 26px rgba(0, 0, 0, .35);
 }
 
@@ -268,24 +269,24 @@ button {
 
 /* Slot positions (edit these to match your map) */
 .s1 {
-    left: 70%;
-    top: 10%;
-    transform: translate(-0%, -0%);
+    left: 23%;
+    top: 24%
 }
 
+
 .s2 {
-    left: 32%;
-    top: 50%;
+    left: 17%;
+    top: 60%;
 }
 
 .s3 {
-    left: 24%;
-    top: 34%;
+    left: 48%;
+    top: 20%;
 }
 
 .s4 {
-    left: 68%;
-    top: 46%;
+    left: 37%;
+    top: 45%;
 }
 
 .s5 {
@@ -294,24 +295,25 @@ button {
 }
 
 .s6 {
-    left: 50%;
-    top: 26%;
+    left: 63%;
+    top: 66%;
 }
 
 .s7 {
-    left: 46%;
+    left: 41%;
     top: 66%;
 }
 
 .s8 {
-    left: 30%;
-    top: 64%;
+    left: 29%;
+    top: 77%;
 }
 
 .s9 {
-    left: 78%;
-    top: 66%;
+    left: 97%;
+    top: 73%;
 }
+
 
 /* Panel */
 .panel {
@@ -564,3 +566,4 @@ button {
         max-width: 100%;
     }
 }
+

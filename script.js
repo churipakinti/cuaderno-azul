@@ -157,13 +157,13 @@ function updateProgressUI(){
   els.progressPill.textContent = `${count}/9 observaciones`;
 
   // Mark buttons as found
-  document.querySelectorAll(".item[data-id]").forEach(btn=>{
+  document.querySelectorAll(".item[data-id], .slot[data-id]").forEach(btn=>{
     const id = btn.getAttribute("data-id");
     btn.classList.toggle("found", state.observed.has(id));
   });
 
   // Unlock fossil after 6 observed
-  const fossilBtn = document.querySelector('.item.fossil[data-id="d9"]');
+  const fossilBtn = document.querySelector('.item.fossil[data-id="d9"], .slot.s9[data-id="d9');
   const unlocked = count >= 6;
   fossilBtn.classList.toggle("locked", !unlocked);
 
@@ -270,7 +270,7 @@ function setupTabs(){
 }
 
 function setupSceneClicks(){
-  document.querySelectorAll(".item[data-id]").forEach(btn=>{
+  document.querySelectorAll(".item[data-id], .slot[data-id]").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       const id = btn.getAttribute("data-id");
       openModal(id);
